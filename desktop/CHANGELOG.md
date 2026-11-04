@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.12.0](https://github.com/kgoedecke/doop/compare/desktop-v0.11.0...desktop-v0.12.0) (2026-11-04)
+
+
+### Features
+
+* **desktop:** build and release the app for Linux ([#295](https://github.com/kgoedecke/doop/issues/295)) ([56d1174](https://github.com/kgoedecke/doop/commit/56d1174ca3214dcb263c2a0cb7fa76a961fa3331))
+* **desktop:** update the app automatically from a signed feed ([#285](https://github.com/kgoedecke/doop/issues/285)) ([3298742](https://github.com/kgoedecke/doop/commit/329874207677d7cf4790b3231aab46fc7f9462e7))
+* **fonts:** hosted fonts in the Design panel, and fonts from this computer on the desktop ([#352](https://github.com/kgoedecke/doop/issues/352)) ([fcbdb5f](https://github.com/kgoedecke/doop/commit/fcbdb5fef89610246b3cb4f1f68177e972f9fb0e))
+
+
+### Bug Fixes
+
+* **sync:** preserve OSS migrations and complete shared font support ([7148e73](https://github.com/kgoedecke/doop/commit/7148e73675aa8eaa036987d932674a32962a8049))
+
 ## [0.11.0](https://github.com/kgoedecke/doop/compare/desktop-v0.10.0...desktop-v0.11.0) (2026-11-01)
 
 
