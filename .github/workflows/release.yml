@@ -1,0 +1,30 @@
+name: Release
+
+# Indicia deploy of upstream Doop (kgoedecke/doop), app code unchanged. See the org reusable for routing:
+#   X.Y.Z-rc.N builds and scans (no acc app, the deploy job ends red on purpose); X.Y.Z deploys to the prod VPS.
+on:
+  push:
+    tags:
+      - "[0-9]+.[0-9]+.[0-9]+"
+      - "[0-9]+.[0-9]+.[0-9]+-rc.[0-9]+"
+
+permissions: {}
+
+concurrency:
+  group: release-${{ contains(github.ref_name, '-rc.') && 'acceptance' || 'production' }}
+  cancel-in-progress: false
+
+jobs:
+  release:
+    permissions:
+      contents: read
+      actions: read
+      packages: write
+    uses: indicia-AI-lab/.github/.github/workflows/release-dokploy.yml@main # zizmor: ignore[unpinned-uses] own org reusable
+    # nosemgrep: yaml.github-actions.security.secrets-inherit.secrets-inherit -- environment secrets, own org workflow
+    secrets: inherit # zizmor: ignore[secrets-inherit]
+    with:
+      checks: false # upstream runs its own CI; this fork adds no app code
+      min-node-version: v22.23.4
+      health-wait: /healthz
+      health-expect: '"ok":true'
