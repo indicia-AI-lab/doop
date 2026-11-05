@@ -28,6 +28,8 @@ FROM oven/bun:1 AS deps
 WORKDIR /app
 COPY package.json bun.lock ./
 RUN bun install --frozen-lockfile --production
+# Build-time tools with old Go binaries; the server migrates with drizzle-orm, not drizzle-kit.
+RUN rm -rf node_modules/drizzle-kit node_modules/@esbuild-kit
 
 # ---- runtime ----
 # Node, not bun: the server runs under tsx, and puppeteer-core, PGlite and ws
@@ -39,6 +41,10 @@ WORKDIR /app
 RUN apt-get update \
   && apt-get install -y --no-install-recommends chromium fonts-liberation fonts-noto-color-emoji \
   && rm -rf /var/lib/apt/lists/*
+
+# The runtime never uses the bundled package managers.
+RUN rm -rf /usr/local/lib/node_modules/npm /usr/local/lib/node_modules/corepack /opt/yarn* \
+  /usr/local/bin/npm /usr/local/bin/npx /usr/local/bin/corepack /usr/local/bin/yarn /usr/local/bin/yarnpkg
 
 ENV NODE_ENV=production \
     CHROME_PATH=/usr/bin/chromium \

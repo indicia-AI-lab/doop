@@ -1,0 +1,8 @@
+# better-auth 1.6.26: 1.7 removes the mcp plugin Doop's MCP login needs. Suppressed by decision of Hari, 2026-11-04.
+# Recheck on every upstream update: these stay valid only while the named plugins are not used.
+# Needs the Magic Link plugin (GHSA-965c-763c-88jm), not used by Doop.
+CVE-2026-114607
+# Needs the device authorization plugin, not used by Doop.
+GHSA-q84f-53jg-9ppm
+# Needs the OAuth Proxy plugin, not used by Doop.
+GHSA-r4xp-prcw-77qf
