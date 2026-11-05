@@ -39,6 +39,7 @@ WORKDIR /app
 
 # Chromium for get_frame_screenshot (puppeteer-core drives the system browser)
 RUN apt-get update \
+  && apt-get upgrade -y \
   && apt-get install -y --no-install-recommends chromium fonts-liberation fonts-noto-color-emoji \
   && rm -rf /var/lib/apt/lists/*
 
