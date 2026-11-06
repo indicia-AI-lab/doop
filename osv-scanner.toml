@@ -1,0 +1,117 @@
+# OSV-uitzonderingen voor de Indicia-fork van Doop. Elke regel heeft een reden en een vervaldatum.
+# Controleer ze bij elke upstream-update; zie ook .trivyignore.
+
+# better-auth 1.6.26: alle fixes zitten pas in 1.7.x, en 1.7 schrapt de mcp-plugin die Doop
+# voor de MCP-login gebruikt (port nodig). Besluit Hari 2026-11-04 (.trivyignore), voor OSV
+# overgenomen 2026-11-06.
+[[IgnoredVulns]]
+id = "GHSA-965c-763c-88jm"
+ignoreUntil = 2027-02-06
+reason = "better-auth: vereist de Magic Link-plugin, die Doop niet gebruikt. Fix alleen in 1.7.7 (port van de mcp-plugin nodig). Besluit Hari 2026-11-04."
+
+[[IgnoredVulns]]
+id = "GHSA-q84f-53jg-9ppm"
+ignoreUntil = 2027-02-06
+reason = "better-auth: vereist de device authorization-plugin, die Doop niet gebruikt. Fix alleen in 1.7.x. Besluit Hari 2026-11-04."
+
+[[IgnoredVulns]]
+id = "GHSA-r4xp-prcw-77qf"
+ignoreUntil = 2027-02-06
+reason = "better-auth: vereist de OAuth Proxy-plugin, die Doop niet gebruikt. Fix alleen in 1.7.7. Besluit Hari 2026-11-04."
+
+[[IgnoredVulns]]
+id = "GHSA-44jh-23m7-hpcf"
+ignoreUntil = 2027-02-06
+reason = "better-auth drizzle/kysely-adapter: race in rate limiting met database-opslag. Doop gebruikt de standaard in-memory rate-limit-opslag. Fix alleen in 1.7.x."
+
+# zod 3: fix alleen in zod 4.6.6+. Doop gebruikt zod 3 zelf (21 bestanden) en via puppeteer/chromium-bidi;
+# een override naar een andere major crashte het image eerder. Migratie naar zod 4 volgt in een aparte PR.
+[[IgnoredVulns]]
+id = "GHSA-mrhx-c7xc-m3w5"
+ignoreUntil = 2027-02-06
+reason = "zod 3.25.76: fix alleen in zod 4 (major). Doop-code migreert in een aparte PR; geen override (crashte eerder bij opstarten)."
+
+# Alleen dev (eslint, ts-morph via shadcn, Storybook-docgen); niet in het productie-image.
+[[IgnoredVulns]]
+id = "GHSA-g3hv-75wg-m249"
+ignoreUntil = 2027-02-06
+reason = "minimatch 10: fix alleen in 11 (major). Alleen dev-tooling (eslint, ts-morph, typescript-estree); niet in het runtime-image."
+
+[[IgnoredVulns]]
+id = "GHSA-3g3m-2fjr-6pw4"
+ignoreUntil = 2027-02-06
+reason = "glob 13: fix alleen in 14 (major). Alleen via Storybook (@joshwooding/vite-plugin-react-docgen-typescript); niet in het runtime-image."
+
+[[IgnoredVulns]]
+id = "GHSA-gcqx-w48m-w2h4"
+ignoreUntil = 2027-02-06
+reason = "deepmerge 4.3.1: geen gefixte release. Alleen via shadcn (dev); niet in het runtime-image."
+
+[[IgnoredVulns]]
+id = "GHSA-67mh-4wv8-2f99"
+ignoreUntil = 2027-02-06
+reason = "esbuild 0.18.20 via drizzle-kit -> @esbuild-kit/core-utils: alleen dev (migraties genereren); de Dockerfile haalt @esbuild-kit uit het image. De bun-alias naar tsx breekt node_modules/.bin/tsx in het image, dus niet gebruikt."
+
+# Rust: desktop/src-tauri (Tauri-app) en ios/BlitzKit (iOS). Indicia bouwt en levert alleen het
+# server-image; de desktop- en iOS-workflows van upstream zijn uit de fork gehaald (2026-11-06).
+# Gaan we die apps ooit zelf bouwen, dan eerst deze uitzonderingen weghalen en de crates bijwerken.
+
+[[IgnoredVulns]]
+id = "RUSTSEC-2024-0429"
+ignoreUntil = 2027-02-06
+reason = "glib 0.18.5 (desktop, via Tauri/gtk-rs): alleen in de desktop-/iOS-app van upstream, die Indicia niet bouwt of levert. Niet in het server-image."
+
+[[IgnoredVulns]]
+id = "RUSTSEC-2024-0370"
+ignoreUntil = 2027-02-06
+reason = "proc-macro-error 1.0.4 (desktop, unmaintained): alleen in de desktop-/iOS-app van upstream, die Indicia niet bouwt of levert. Niet in het server-image."
+
+[[IgnoredVulns]]
+id = "RUSTSEC-2026-0386"
+ignoreUntil = 2027-02-06
+reason = "tokio 1.53.1/1.53.2 (desktop en iOS): alleen in de desktop-/iOS-app van upstream, die Indicia niet bouwt of levert. Niet in het server-image."
+
+[[IgnoredVulns]]
+id = "RUSTSEC-2025-0081"
+ignoreUntil = 2027-02-06
+reason = "unic-char-property (desktop, unmaintained): alleen in de desktop-/iOS-app van upstream, die Indicia niet bouwt of levert. Niet in het server-image."
+
+[[IgnoredVulns]]
+id = "RUSTSEC-2025-0075"
+ignoreUntil = 2027-02-06
+reason = "unic-char-range (desktop, unmaintained): alleen in de desktop-/iOS-app van upstream, die Indicia niet bouwt of levert. Niet in het server-image."
+
+[[IgnoredVulns]]
+id = "RUSTSEC-2025-0080"
+ignoreUntil = 2027-02-06
+reason = "unic-common (desktop, unmaintained): alleen in de desktop-/iOS-app van upstream, die Indicia niet bouwt of levert. Niet in het server-image."
+
+[[IgnoredVulns]]
+id = "RUSTSEC-2025-0100"
+ignoreUntil = 2027-02-06
+reason = "unic-ucd-ident (desktop, unmaintained): alleen in de desktop-/iOS-app van upstream, die Indicia niet bouwt of levert. Niet in het server-image."
+
+[[IgnoredVulns]]
+id = "RUSTSEC-2025-0098"
+ignoreUntil = 2027-02-06
+reason = "unic-ucd-version (desktop, unmaintained): alleen in de desktop-/iOS-app van upstream, die Indicia niet bouwt of levert. Niet in het server-image."
+
+[[IgnoredVulns]]
+id = "RUSTSEC-2026-0371"
+ignoreUntil = 2027-02-06
+reason = "zbus_names 4.3.4 (desktop): alleen in de desktop-/iOS-app van upstream, die Indicia niet bouwt of levert. Niet in het server-image."
+
+[[IgnoredVulns]]
+id = "RUSTSEC-2026-0370"
+ignoreUntil = 2027-02-06
+reason = "zvariant 5.15.0 (desktop): alleen in de desktop-/iOS-app van upstream, die Indicia niet bouwt of levert. Niet in het server-image."
+
+[[IgnoredVulns]]
+id = "RUSTSEC-2026-0372"
+ignoreUntil = 2027-02-06
+reason = "zvariant_derive 5.15.0 (desktop): alleen in de desktop-/iOS-app van upstream, die Indicia niet bouwt of levert. Niet in het server-image."
+
+[[IgnoredVulns]]
+id = "RUSTSEC-2026-0186"
+ignoreUntil = 2027-02-06
+reason = "memmap2 0.5.10 (iOS BlitzKit): alleen in de desktop-/iOS-app van upstream, die Indicia niet bouwt of levert. Niet in het server-image."

@@ -58,6 +58,13 @@ COPY --from=build /app/dist ./dist
 COPY server ./server
 COPY shared ./shared
 
+# Run as the image's unprivileged `node` user (uid 1000). The server only writes
+# under /app/data (PGlite, assets, store.json) and the OS temp dir; the code stays
+# root-owned and read-only. An existing volume on /app/data needs a one-time
+# `chown -R 1000:1000` before the first deploy of this image.
+RUN mkdir -p /app/data && chown node:node /app/data
+USER node
+
 EXPOSE 4400
 HEALTHCHECK --interval=30s --timeout=5s CMD node -e "fetch('http://localhost:'+process.env.PORT+'/healthz').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"
 # the installed binary rather than npx: npm is not what resolves packages here
