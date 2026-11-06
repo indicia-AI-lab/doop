@@ -51,3 +51,67 @@ reason = "deepmerge 4.3.1: geen gefixte release. Alleen via shadcn (dev); niet i
 id = "GHSA-67mh-4wv8-2f99"
 ignoreUntil = 2027-02-06
 reason = "esbuild 0.18.20 via drizzle-kit -> @esbuild-kit/core-utils: alleen dev (migraties genereren); de Dockerfile haalt @esbuild-kit uit het image. De bun-alias naar tsx breekt node_modules/.bin/tsx in het image, dus niet gebruikt."
+
+# Rust: desktop/src-tauri (Tauri-app) en ios/BlitzKit (iOS). Indicia bouwt en levert alleen het
+# server-image; de desktop- en iOS-workflows van upstream zijn uit de fork gehaald (2026-11-06).
+# Gaan we die apps ooit zelf bouwen, dan eerst deze uitzonderingen weghalen en de crates bijwerken.
+
+[[IgnoredVulns]]
+id = "RUSTSEC-2024-0429"
+ignoreUntil = 2027-02-06
+reason = "glib 0.18.5 (desktop, via Tauri/gtk-rs): alleen in de desktop-/iOS-app van upstream, die Indicia niet bouwt of levert. Niet in het server-image."
+
+[[IgnoredVulns]]
+id = "RUSTSEC-2024-0370"
+ignoreUntil = 2027-02-06
+reason = "proc-macro-error 1.0.4 (desktop, unmaintained): alleen in de desktop-/iOS-app van upstream, die Indicia niet bouwt of levert. Niet in het server-image."
+
+[[IgnoredVulns]]
+id = "RUSTSEC-2026-0386"
+ignoreUntil = 2027-02-06
+reason = "tokio 1.53.1/1.53.2 (desktop en iOS): alleen in de desktop-/iOS-app van upstream, die Indicia niet bouwt of levert. Niet in het server-image."
+
+[[IgnoredVulns]]
+id = "RUSTSEC-2025-0081"
+ignoreUntil = 2027-02-06
+reason = "unic-char-property (desktop, unmaintained): alleen in de desktop-/iOS-app van upstream, die Indicia niet bouwt of levert. Niet in het server-image."
+
+[[IgnoredVulns]]
+id = "RUSTSEC-2025-0075"
+ignoreUntil = 2027-02-06
+reason = "unic-char-range (desktop, unmaintained): alleen in de desktop-/iOS-app van upstream, die Indicia niet bouwt of levert. Niet in het server-image."
+
+[[IgnoredVulns]]
+id = "RUSTSEC-2025-0080"
+ignoreUntil = 2027-02-06
+reason = "unic-common (desktop, unmaintained): alleen in de desktop-/iOS-app van upstream, die Indicia niet bouwt of levert. Niet in het server-image."
+
+[[IgnoredVulns]]
+id = "RUSTSEC-2025-0100"
+ignoreUntil = 2027-02-06
+reason = "unic-ucd-ident (desktop, unmaintained): alleen in de desktop-/iOS-app van upstream, die Indicia niet bouwt of levert. Niet in het server-image."
+
+[[IgnoredVulns]]
+id = "RUSTSEC-2025-0098"
+ignoreUntil = 2027-02-06
+reason = "unic-ucd-version (desktop, unmaintained): alleen in de desktop-/iOS-app van upstream, die Indicia niet bouwt of levert. Niet in het server-image."
+
+[[IgnoredVulns]]
+id = "RUSTSEC-2026-0371"
+ignoreUntil = 2027-02-06
+reason = "zbus_names 4.3.4 (desktop): alleen in de desktop-/iOS-app van upstream, die Indicia niet bouwt of levert. Niet in het server-image."
+
+[[IgnoredVulns]]
+id = "RUSTSEC-2026-0370"
+ignoreUntil = 2027-02-06
+reason = "zvariant 5.15.0 (desktop): alleen in de desktop-/iOS-app van upstream, die Indicia niet bouwt of levert. Niet in het server-image."
+
+[[IgnoredVulns]]
+id = "RUSTSEC-2026-0372"
+ignoreUntil = 2027-02-06
+reason = "zvariant_derive 5.15.0 (desktop): alleen in de desktop-/iOS-app van upstream, die Indicia niet bouwt of levert. Niet in het server-image."
+
+[[IgnoredVulns]]
+id = "RUSTSEC-2026-0186"
+ignoreUntil = 2027-02-06
+reason = "memmap2 0.5.10 (iOS BlitzKit): alleen in de desktop-/iOS-app van upstream, die Indicia niet bouwt of levert. Niet in het server-image."

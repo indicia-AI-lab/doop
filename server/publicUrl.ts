@@ -243,6 +243,8 @@ export async function guardPublicPageRequests(
   await page.setBypassServiceWorker(true)
   const client = await page.createCDPSession()
   await client.send('Network.enable')
+  // These patterns block every WebSocket the rendered page tries to open; nothing connects to them.
+  // nosemgrep: javascript.lang.security.detect-insecure-websocket.detect-insecure-websocket
   await client.send('Network.setBlockedURLs', { urls: ['ws://*', 'wss://*'] })
   await page.setRequestInterception(true)
   page.on('request', (request) => {
